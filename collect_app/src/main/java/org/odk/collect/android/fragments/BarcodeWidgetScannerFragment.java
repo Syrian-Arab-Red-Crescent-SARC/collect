@@ -8,6 +8,7 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 
 import org.odk.collect.android.activities.FormEntryActivity;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 public class BarcodeWidgetScannerFragment extends BarCodeScannerFragment {
@@ -17,7 +18,7 @@ public class BarcodeWidgetScannerFragment extends BarCodeScannerFragment {
     }
 
     @Override
-    protected void handleScanningResult(BarcodeResult result) {
+    protected void handleScanningResult(BarcodeResult result) throws UnsupportedEncodingException {
         Intent returnIntent = new Intent();
         returnIntent.putExtra(FormEntryActivity.ANSWER_KEY, result.getText());
         getActivity().setResult(Activity.RESULT_OK, returnIntent);

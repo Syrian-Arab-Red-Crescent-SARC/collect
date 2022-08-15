@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2009 University of Washington
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -38,6 +38,7 @@ import org.odk.collect.android.widgets.interfaces.WidgetDataReceiver;
 import org.odk.collect.android.widgets.utilities.WaitingForDataRegistry;
 import org.odk.collect.permissions.PermissionListener;
 
+
 /**
  * Widget that allows user to scan barcodes and add them to the form.
  */
@@ -48,6 +49,7 @@ public class BarcodeWidget extends QuestionWidget implements WidgetDataReceiver 
 
     private final WaitingForDataRegistry waitingForDataRegistry;
     private final CameraUtils cameraUtils;
+    private Object DesiredBarcodeFormats;
 
     public BarcodeWidget(Context context, QuestionDetails questionDetails, WaitingForDataRegistry waitingForDataRegistry,
                          CameraUtils cameraUtils) {
@@ -90,9 +92,19 @@ public class BarcodeWidget extends QuestionWidget implements WidgetDataReceiver 
         return answer.isEmpty() ? null : new StringData(answer);
     }
 
+    public static String convertUTF8ToString(String s) {
+        String response = null;
+        try {
+            response = new String(s.getBytes("UTF-32"), "windows-1256");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return response;
+    }
     @Override
     public void setData(Object answer) {
         String response = (String) answer;
+        response = convertUTF8ToString(response);
         binding.barcodeAnswerText.setText(stripInvalidCharacters(response));
         binding.barcodeButton.setText(getContext().getString(R.string.replace_barcode));
         widgetValueChanged();
@@ -115,6 +127,7 @@ public class BarcodeWidget extends QuestionWidget implements WidgetDataReceiver 
         binding.barcodeButton.cancelLongPress();
         binding.barcodeAnswerText.cancelLongPress();
     }
+
 
     private void onButtonClick() {
         getPermissionsProvider().requestCameraPermission((Activity) getContext(), new PermissionListener() {

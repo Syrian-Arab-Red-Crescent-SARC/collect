@@ -163,8 +163,8 @@ public final class ExternalAppsUtils {
         }
     }
 
-    public static StringData asStringData(Object value) {
-        return value == null ? null : new StringData(value.toString());
+        public static StringData asStringData(Object RESULT ) {
+        return RESULT == null ? null : new StringData(RESULT.toString());
     }
 
     public static IntegerData asIntegerData(Object value) {
