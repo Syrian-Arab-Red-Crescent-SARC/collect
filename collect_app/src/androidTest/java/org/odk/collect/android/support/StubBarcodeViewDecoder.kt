@@ -10,6 +10,7 @@ import org.odk.collect.android.utilities.CompressionUtils
 import org.odk.collect.android.views.BarcodeViewDecoder
 import java.io.IOException
 
+
 class StubBarcodeViewDecoder : BarcodeViewDecoder() {
     var liveData = MutableLiveData<BarcodeResult>()
 
@@ -23,7 +24,7 @@ class StubBarcodeViewDecoder : BarcodeViewDecoder() {
                 CompressionUtils.compress(settings),
                 byteArrayOf(),
                 arrayOf(),
-                BarcodeFormat.AZTEC
+                BarcodeFormat.PDF_417
             )
             val barcodeResult = BarcodeResult(result, null)
             liveData.postValue(barcodeResult)

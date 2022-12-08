@@ -78,9 +78,9 @@ the specific language governing permissions and limitations under the License.
     <application
         android:name=".application.Collect"
         android:allowBackup="true"
-        android:icon="@drawable/notes"
+        android:icon="@drawable/odk_logo"
         android:installLocation="auto"
-        android:label="@string/collect_app_name"
+        android:label="SARC-IM ODK"
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
@@ -116,7 +116,7 @@ the specific language governing permissions and limitations under the License.
 
         <activity
             android:name=".activities.ScannerWithFlashlightActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity

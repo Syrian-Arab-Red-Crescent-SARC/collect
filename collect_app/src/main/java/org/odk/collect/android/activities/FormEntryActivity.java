@@ -348,7 +348,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
 
     /**
      * True if the Android location permission was granted last time it was checked. Allows for
-     * detection of location permissions changes while the activity is in the background.
+     * detection of location permissions changes while the activity is in   the background.
      */
     private boolean locationPermissionsPreviouslyGranted;
 
