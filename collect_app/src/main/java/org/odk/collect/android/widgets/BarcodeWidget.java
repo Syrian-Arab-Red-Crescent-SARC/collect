@@ -48,6 +48,8 @@ public class BarcodeWidget extends QuestionWidget implements WidgetDataReceiver 
     private final WaitingForDataRegistry waitingForDataRegistry;
     private final CameraUtils cameraUtils;
 
+    private Object DesiredBarcodeFormats;
+
     public BarcodeWidget(Context context, QuestionDetails questionDetails, WaitingForDataRegistry waitingForDataRegistry,
                          CameraUtils cameraUtils) {
         super(context, questionDetails);
@@ -91,9 +93,20 @@ public class BarcodeWidget extends QuestionWidget implements WidgetDataReceiver 
         return answer.isEmpty() ? null : new StringData(answer);
     }
 
+    public static String convertUTF8ToString(String s) {
+        String response = null;
+        try {
+            response = new String(s.getBytes("UTF-32"), "windows-1256");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return response;
+    }
+
     @Override
     public void setData(Object answer) {
         String response = (String) answer;
+        response = convertUTF8ToString(response);
         binding.barcodeAnswerText.setText(stripInvalidCharacters(response));
         binding.barcodeButton.setText(getContext().getString(R.string.replace_barcode));
         widgetValueChanged();
