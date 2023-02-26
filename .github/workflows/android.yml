@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "IM-SARC" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "IM-SARC" ]
+    branches: [ "master" ]
 
 jobs:
   build:
